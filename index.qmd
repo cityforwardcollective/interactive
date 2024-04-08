@@ -1,5 +1,5 @@
 ---
-title: "Absentee Voters"
+title: "2024 MPS Referendum Results"
 format: 
   html:
     embed-resources: true
@@ -41,7 +41,7 @@ pal <- colorBin(rev(pa), domain = c(-385, 385))
 
 ```
 
-The map below shows absentee voting prior to election day for the Spring Election in Milwaukee. Boundaries represent wards.
+The map below shows the results of the MPS Referendum, held during the Spring 2024 Election. Boundaries represent wards.
 
 ```{r map}
 #| fig-height: 11
@@ -51,9 +51,10 @@ leaflet(dw) |>
                  username = "mapbox", 
                  scaling_factor = "0.5x") |> 
   addPolygons(weight = 2, 
-              fillColor = ~pal(margin_n), fillOpacity = .8,
+              fillColor = ~pal(margin_n), fillOpacity = .9,
               color = "white", 
-              popup = glue("Ward: {dw$WARD}<br>Yes Margin: {dw$margin_n}"), 
+              popup = glue("Ward: {dw$WARD}<br>Yes Margin: {dw$margin_n}"),
+              popupOptions = popupOptions(autoPan = TRUE),
               highlight = highlightOptions(color = "black", fillColor = "white",
                                            fillOpacity = .25, bringToFront = TRUE)) |> 
   addLegend(pal = pal, values = ~n, opacity = 0.9, title = "Yes Margin",
